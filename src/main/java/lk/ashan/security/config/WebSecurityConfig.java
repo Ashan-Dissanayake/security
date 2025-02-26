@@ -16,10 +16,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfig{
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                authorizeRequests -> authorizeRequests.anyRequest().permitAll()
-        );
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests( authorizeRequests -> authorizeRequests.anyRequest().authenticated());
         return http.build();
     }
 
