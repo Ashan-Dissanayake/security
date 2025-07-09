@@ -1,24 +1,27 @@
 package lk.ashan.security.service;
 
+import lk.ashan.security.dao.UserDao;
+import lk.ashan.security.entity.UserPrincipal;
+import lk.ashan.security.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class UserDetailsServicee implements UserDetailsService {
 
-public class InMemoryUserDetailsService implements UserDetailsService {
+    private final UserDao userDao;
 
-    private final List<UserDetails> users;
-
-    public InMemoryUserDetailsService(List<UserDetails> users) {
-        this.users = users;
+    public UserDetailsServicee(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.stream()
-                .filter(u -> u.getUsername().equals(username))
-                .findFirst()
+        User user = userDao.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return new UserPrincipal(user);
     }
 }
