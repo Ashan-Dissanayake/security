@@ -48,8 +48,11 @@ public class User{
     @ManyToOne
     @JoinColumn(name = "userstatus_id", referencedColumnName = "id", nullable = false)
     private Userstatus userstatus;
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Userrole> userroles;
+    @ManyToOne
+    @JoinColumn(name = "usertype_id", referencedColumnName = "id", nullable = false)
+    private Usertype usertype;
 
     public Integer getId() {
         return id;
@@ -172,5 +175,13 @@ public class User{
 
     public void setUserroles(Collection<Userrole> userroles) {
         this.userroles = userroles;
+    }
+
+    public Usertype getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(Usertype usertype) {
+        this.usertype = usertype;
     }
 }

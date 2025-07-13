@@ -55,7 +55,7 @@ public class UserPrincipal implements UserDetails, Serializable {
         return Optional.ofNullable(user.getUserroles())
                 .orElse(List.of())
                 .stream()
-                .map(userrole -> new SimpleGrantedAuthority("ROLE_" +userrole.getRole().getName()))
+                .map(userrole -> new SimpleGrantedAuthority("ROLE_" +userrole.getRole().getName().toUpperCase()))
                 .collect(Collectors.toList());
     }
 

@@ -1,8 +1,9 @@
 package lk.ashan.security.config;
 
-import lk.ashan.security.service.UserDetailsServicee;
+import lk.ashan.security.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,14 +20,22 @@ public class WebSecurityConfig{
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests.anyRequest().authenticated()
-        ).httpBasic(Customizer.withDefaults());
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/users").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 
+
+
     @Bean
-    public AuthenticationManager authenticationManager(UserDetailsServicee userDetailsService, PasswordEncoder passwordEncoder) {
+    public AuthenticationManager authenticationManager(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
