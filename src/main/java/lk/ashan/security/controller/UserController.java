@@ -5,6 +5,7 @@ import lk.ashan.security.model.entity.User;
 import lk.ashan.security.model.entity.Userrole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class UserController {
     @Autowired private UserDao userDao;
 
     @GetMapping(produces = "application/json")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public List<User> getAll(){
         return this.userDao.findAll();
     }
@@ -26,6 +28,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public HashMap<String,String> add(@RequestBody User user){
 
         HashMap<String,String> responce = new HashMap<>();
