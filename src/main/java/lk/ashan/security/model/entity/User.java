@@ -1,8 +1,6 @@
-package lk.ashan.security.entity;
+package lk.ashan.security.model.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
 import java.sql.Time;

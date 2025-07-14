@@ -1,8 +1,8 @@
 package lk.ashan.security.controller;
 
 import lk.ashan.security.dao.UserDao;
-import lk.ashan.security.entity.User;
-import lk.ashan.security.entity.Userrole;
+import lk.ashan.security.model.entity.User;
+import lk.ashan.security.model.entity.Userrole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

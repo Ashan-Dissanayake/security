@@ -1,4 +1,4 @@
-package lk.ashan.security.entity;
+package lk.ashan.security.model.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

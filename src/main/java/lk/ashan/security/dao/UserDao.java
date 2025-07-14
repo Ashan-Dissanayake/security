@@ -1,6 +1,6 @@
 package lk.ashan.security.dao;
 
-import lk.ashan.security.entity.User;
+import lk.ashan.security.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package lk.ashan.security.service;
 
 import lk.ashan.security.dao.UserDao;
-import lk.ashan.security.entity.UserPrincipal;
-import lk.ashan.security.entity.User;
+import lk.ashan.security.model.entity.UserPrincipal;
+import lk.ashan.security.model.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

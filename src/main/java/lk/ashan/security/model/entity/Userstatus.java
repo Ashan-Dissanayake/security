@@ -1,4 +1,4 @@
-package lk.ashan.security.entity;
+package lk.ashan.security.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Role {
+public class Userstatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -16,8 +16,8 @@ public class Role {
     @Column(name = "name")
     private String name;
     @JsonIgnore
-    @OneToMany(mappedBy = "role")
-    private Collection<Userrole> userroles;
+    @OneToMany(mappedBy = "userstatus")
+    private Collection<User> users;
 
     public Integer getId() {
         return id;
@@ -39,8 +39,8 @@ public class Role {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
+        Userstatus that = (Userstatus) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override
@@ -48,11 +48,11 @@ public class Role {
         return Objects.hash(id, name);
     }
 
-    public Collection<Userrole> getUserroles() {
-        return userroles;
+    public Collection<User> getUsers() {
+        return users;
     }
 
-    public void setUserroles(Collection<Userrole> userroles) {
-        this.userroles = userroles;
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }
